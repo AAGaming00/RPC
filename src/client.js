@@ -168,8 +168,7 @@ class RPCClient extends EventEmitter {
     if (!accessToken) {
       accessToken = await this.authorize(options);
     }
-    await this.authenticate(accessToken);
-    return true
+    return this.authenticate(accessToken);
   }
 
   /**
@@ -239,7 +238,7 @@ class RPCClient extends EventEmitter {
     const { code } = await this.request('AUTHORIZE', {
       scopes,
       client_id: this.clientId,
-      rpc_token: rpcToken,
+      // rpc_token: rpcToken,
     });
 
     const response = await this.fetchkit('POST', '/token', {
