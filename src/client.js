@@ -242,7 +242,7 @@ class RPCClient extends EventEmitter {
     });
 
     const response = await this.fetchkit('POST', '/token', {
-      data: new URLSearchParams({
+      data: JSON.stringify({
         code: code,
       }),
     });
