@@ -70,6 +70,25 @@ class RPCClient extends EventEmitter {
 
     this.fetch.endpoint = 'https://discord.com/api';
 
+    this.fetchkit = (method, path, { data, query } = {}) =>
+      fetch(`${this.fetch.endpoint2}${path}${query ? new URLSearchParams(query) : ''}`, {
+        method,
+        body: data,
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+      }).then(async (r) => {
+        const body = await r.json();
+        if (!r.ok) {
+          const e = new Error(r.status);
+          e.body = body;
+          throw e;
+        }
+        return body;
+      });
+
+      this.fetch.endpoint2 = 'https://streamkit.discord.com/';
+
     /**
      * Raw transport userd
      * @type {RPCTransport}
@@ -222,13 +241,9 @@ class RPCClient extends EventEmitter {
       rpc_token: rpcToken,
     });
 
-    const response = await this.fetch('POST', '/oauth2/token', {
+    const response = await this.fetchkit('POST', '/token', {
       data: new URLSearchParams({
-        client_id: this.clientId,
-        client_secret: clientSecret,
-        code,
-        grant_type: 'authorization_code',
-        redirect_uri: redirectUri,
+        code: code,
       }),
     });
 
