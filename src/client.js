@@ -246,7 +246,6 @@ class RPCClient extends EventEmitter {
         code: code,
       }),
     });
-    console.log(response.access_token)
     return response.access_token;
   }
 
