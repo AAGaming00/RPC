@@ -168,7 +168,8 @@ class RPCClient extends EventEmitter {
     if (!accessToken) {
       accessToken = await this.authorize(options);
     }
-    return this.authenticate(accessToken);
+    await this.authenticate(accessToken);
+    return true
   }
 
   /**
