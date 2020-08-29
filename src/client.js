@@ -87,7 +87,7 @@ class RPCClient extends EventEmitter {
         return body;
       });
 
-      this.fetch.endpoint2 = 'https://streamkit.discord.com/';
+      this.fetch.endpoint2 = 'https://streamkit.discord.com';
 
     /**
      * Raw transport userd
