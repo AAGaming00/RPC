@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "node-fetch": "2.6.0",
-    "ws": "7.1.2"
+    "ws": "7.5.10"
   },
   "peerDependencies": {
     "register-scheme": "github:devsnek/node-register-scheme"
